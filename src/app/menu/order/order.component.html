@@ -1,0 +1,22 @@
+<!-- order.component.html -->
+
+<p>
+  Your order has {{orders.orders.length}} drink(s)!
+</p>
+
+<hr>
+
+<table *ngIf="orders.orders.length > 0">
+  <tr>
+    <th>Drink Type</th>
+    <th>Drink Price</th>
+    <th>Special Instructions</th>
+  </tr>
+  <tr *ngFor="let order of orders.orders">
+    <td>{{order.drinkType}}</td>
+    <td>{{order.drinkPrice}}</td>
+    <td>{{order.specialInstructions}}</td>
+  </tr>
+</table>
+
+<p style="color:blue" *ngIf="orderTotalService.calcOrderTotal(orders.orders) > 0">Order Total is:   ${{orderTotalService.calcOrderTotal(orders.orders)}}</p>

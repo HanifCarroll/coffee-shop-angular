@@ -1,0 +1,94 @@
+<form
+  *ngIf="orders.orders.length > 0"
+  (ngSubmit)="
+    purchaseList.addPurchase(
+      OrderForm.form.value,
+      orderTotalService.calcOrderTotal(orders.orders)
+    )
+  "
+  #OrderForm="ngForm"
+>
+  <div class="field">
+    <label for="name">Name</label> <br />
+    <input
+      id="name"
+      name="name"
+      [(ngModel)]="name"
+      type="text"
+      #nameModel="ngModel"
+      required
+    />
+    <p [hidden]="nameModel.valid || nameModel.pristine">
+      This field is required
+    </p>
+  </div>
+  <div class="field">
+    <label for="address">Address</label><br /><input
+      id="address"
+      name="address"
+      [(ngModel)]="address"
+      type="text"
+      #addressModel="ngModel"
+      required
+    />
+    <p [hidden]="addressModel.valid || addressModel.pristine">
+      This field is required
+    </p>
+  </div>
+  <div class="field">
+    <label for="apartment">Apartment Number</label><br /><input
+      id="apartment"
+      name="apartment"
+      [(ngModel)]="apartment"
+      type="text"
+    />
+  </div>
+  <div class="field">
+    <label for="credit-card">Card Number</label><br /><input
+      id="credit-card"
+      type="text"
+      name="creditCard"
+      [(ngModel)]="creditCard"
+      #cardModel="ngModel"
+      required
+    />
+    <p [hidden]="cardModel.valid || cardModel.pristine">
+      This field is required
+    </p>
+  </div>
+  <div class="field">
+    <label for="expiration-date">Card Expiration Date</label><br /><input
+      id="expiration-date"
+      type="text"
+      name="expirationDate"
+      [(ngModel)]="expirationDate"
+      #dateModel="ngModel"
+      required
+    />
+    <p [hidden]="dateModel.valid || dateModel.pristine">
+      This field is required
+    </p>
+  </div>
+  <input type="submit" [disabled]="!OrderForm.form.valid" value="Submit" />
+</form>
+
+<table>
+  <tr>
+    <th>Purchase No.</th>
+    <th>Name on Card</th>
+    <th>Address</th>
+    <th>Apartment Number</th>
+    <th>Card Number</th>
+    <th>Expiry Date</th>
+    <th>Amount Charged</th>
+  </tr>
+  <tr *ngFor="let purchase of purchaseList.purchases; index as i">
+    <td>{{ i }}</td>
+    <td>{{ purchase.name }}</td>
+    <td>{{ purchase.address }}</td>
+    <td>{{ purchase.apartment }}</td>
+    <td>{{ purchase.creditCard }}</td>
+    <td>{{ purchase.expirationDate }}</td>
+    <td>{{ purchase.total }}</td>
+  </tr>
+</table>

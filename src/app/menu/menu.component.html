@@ -1,0 +1,17 @@
+
+<br>
+<ul>
+  <li *ngFor="let menuItem of menuService.menu; index as i">
+    <button (click)="orders.addDrink(menuItem)">{{menuItem.drinkName}} --- {{menuItem.drinkPrice}} --- {{menuItem.numCalories}}</button>
+  </li>
+</ul>
+
+<label>Special Instructions: </label><br>
+<input type="text" [(ngModel)]="orders.instructions">
+
+<p>{{orders.instructions}}</p>
+
+<hr>
+<!-- Going to use a custom property binding to pass
+the orders array into the order component -->
+<app-order></app-order>
